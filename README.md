@@ -33,24 +33,24 @@ Usage
 
 Add this Code to your collectedinfo Template:
 
-{if is_set($object.data_map.lead_source)}
-    {if $object.data_map.lead_source.has_content}
+    {if is_set($object.data_map.lead_source)}
+        {if $object.data_map.lead_source.has_content}
 
-    {let $postData = hash()}
+        {let $postData = hash()}
 
-   	    {set $postData = $postData|merge(hash('lead_source', $object.data_map.lead_source.content))}
+       	    {set $postData = $postData|merge(hash('lead_source', $object.data_map.lead_source.content))}
 
-    	{foreach $collection.data_map as $key => $post}
+        	{foreach $collection.data_map as $key => $post}
 
-    	    {if $post.content|ne('')}
-        	    {set $postData = $postData|merge(hash($key, $post.content))}
-    	    {/if}
+        	    {if $post.content|ne('')}
+            	    {set $postData = $postData|merge(hash($key, $post.content))}
+        	    {/if}
 
-    	{/foreach}
+        	{/foreach}
 
-        {def $salesforce_result = fetch( 'salesforce', 'web2lead', hash( formdata, $postData ) )}
+            {def $salesforce_result = fetch( 'salesforce', 'web2lead', hash( formdata, $postData ) )}
 
-    {/let}
+        {/let}
 
+        {/if}
     {/if}
-{/if}
